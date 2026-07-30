@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/*
+  Phase 1: base tokens only, enough to render a correct dark shell with
+  no flash-of-light-theme. The full palette, type scale, and glass/glow
+  system are defined in Phase 2 (global design system).
+*/
+:root {
+  --background: #05070a;
+  --foreground: #e8eaed;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  /* Placeholder system stacks — Phase 2 replaces these with the real,
+     deliberately chosen display/body/mono type pairing. */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
