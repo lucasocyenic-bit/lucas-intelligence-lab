@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
-import "./globals.css";
 
-// Phase 1 uses the system font stack (see globals.css) so the app has zero
-// external network dependencies at build time. Phase 2 selects and wires in
-// the deliberate display/body/mono type pairing for the real design system.
+// Self-hosted font files (npm packages, not next/font/google) — zero
+// external network dependency at build time, works in any CI/offline
+// environment. See ARCHITECTURE.md.
+import "@fontsource-variable/bricolage-grotesque/wght.css";
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/500.css";
+import "@fontsource/ibm-plex-sans/600.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Lucas // Intelligence Lab",
@@ -18,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-full flex flex-col bg-background font-body text-foreground">
         {children}
       </body>
     </html>

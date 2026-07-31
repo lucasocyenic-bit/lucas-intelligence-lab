@@ -1,23 +1,82 @@
 @import "tailwindcss";
 
-/*
-  Phase 1: base tokens only, enough to render a correct dark shell with
-  no flash-of-light-theme. The full palette, type scale, and glass/glow
-  system are defined in Phase 2 (global design system).
-*/
+/* ─────────────────────────────────────────────────────────────────────
+   LUCAS // INTELLIGENCE LAB — design tokens
+   Palette: dark instrumentation panel, not a generic near-black+neon
+   screen — a *cool signal* (digital/AI) paired with a *warm brass*
+   (precision instrument) accent, on layered glass surfaces.
+   ───────────────────────────────────────────────────────────────────── */
 :root {
-  --background: #05070a;
-  --foreground: #e8eaed;
+  /* Surfaces */
+  --void: #05070a; /* page background */
+  --surface: #0d1219; /* glass panel base */
+  --surface-2: #131a24; /* elevated glass (popovers, active panel) */
+  --line: #202834; /* hairline borders */
+  --line-strong: #2c3644; /* borders on hover/focus */
+
+  /* Ink */
+  --ink: #e8eaed; /* primary text */
+  --ink-muted: #8991a0; /* secondary text, labels */
+  --ink-faint: #565f6c; /* tertiary, disabled */
+
+  /* Signal accents — used sparingly, never as a background fill */
+  --signal: #7fd8c8; /* cool teal — "online", AI/digital activity */
+  --signal-strong: #9be8da;
+  --flag: #c99a5b; /* warm brass — rare highlight, precision-instrument warmth */
+  --flag-strong: #ddb479;
+
+  /* Status (Business OS agent stream, form states) */
+  --status-ok: var(--signal);
+  --status-warn: var(--flag);
+  --status-error: #d97b6c;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  /* Placeholder system stacks — Phase 2 replaces these with the real,
-     deliberately chosen display/body/mono type pairing. */
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    sans-serif;
-  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+  --color-void: var(--void);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-background: var(--void);
+  --color-foreground: var(--ink);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+
+  --color-signal: var(--signal);
+  --color-signal-strong: var(--signal-strong);
+  --color-flag: var(--flag);
+  --color-flag-strong: var(--flag-strong);
+  --color-status-ok: var(--status-ok);
+  --color-status-warn: var(--status-warn);
+  --color-status-error: var(--status-error);
+
+  /* Type — three deliberate roles, no serif here (Discover Greece owns
+     the serif/luxury register; the lab shell is instrument-precise). */
+  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui,
+    sans-serif; /* headlines only, used with restraint */
+  --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+  --font-sans: var(--font-body); /* Tailwind's default font-sans alias */
+
+  /* Tracking — the mono "telemetry label" treatment used for eyebrows,
+     nav items, status strips throughout the lab. */
+  --tracking-eyebrow: 0.28em;
+
+  /* Radius — intentionally small. Corners read as machined, not bubbly. */
+  --radius-xs: 3px;
+  --radius-sm: 5px;
+  --radius-md: 8px;
+
+  /* Glow — restrained: a soft, tight halo, not a bloom. Reserved for
+     active/hover states on interactive elements only. */
+  --shadow-glow-signal: 0 0 0 1px color-mix(in oklab, var(--signal) 40%, transparent),
+    0 0 24px -8px color-mix(in oklab, var(--signal) 70%, transparent);
+  --shadow-glow-flag: 0 0 0 1px color-mix(in oklab, var(--flag) 40%, transparent),
+    0 0 24px -8px color-mix(in oklab, var(--flag) 70%, transparent);
+  --shadow-panel: 0 1px 0 0 color-mix(in oklab, white 4%, transparent) inset,
+    0 12px 32px -16px rgb(0 0 0 / 0.6);
 }
 
 html {
@@ -25,8 +84,17 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--void);
+  color: var(--ink);
+}
+
+/* Glass panel surface, shared by Panel and any future component that
+   needs the same frosted-instrument-window treatment. */
+.glass {
+  background: color-mix(in oklab, var(--surface) 82%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--line);
 }
 
 @media (prefers-reduced-motion: reduce) {

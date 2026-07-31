@@ -4,10 +4,11 @@ A premium, production-quality personal portfolio ecosystem — a central "lab"
 connecting five flagship experiences: Autonomous AI Business OS, Discover
 Greece, Lucas AI Digital Twin, AI Knowledge Universe, and Experiment Lab.
 
-See [`ARCHITECTURE.md`](./ARCHITECTURE.md) for the stack, folder layout, and
-full phase plan. This repo is being built incrementally, phase by phase —
-**Phase 1 (core application) is complete**; see the table in that file for
-what's next.
+See [`ARCHITECTURE.md`](./ARCHITECTURE.md) for the stack, folder layout,
+design-token rationale, and full phase plan. This repo is being built
+incrementally, phase by phase — **Phases 1–2 are complete** (core app +
+global design system); see the table in that file for what's next. Preview
+the design system locally at `/design-system` (dev only).
 
 ## Getting started
 
